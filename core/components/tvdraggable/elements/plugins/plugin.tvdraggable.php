@@ -1,21 +1,18 @@
 <?php
-/*
- * Автор плагина: Сергей Зверев <element1493@yandex.ru>
- */
 $corePath = $modx->getOption('core_path', null, MODX_CORE_PATH).'components/tvdraggable/';
 $assetsUrl = $modx->getOption('assets_url', null, MODX_CORE_PATH).'components/tvdraggable/';
 switch ($modx->event->name) {
     case 'OnTVInputRenderList':
-        $modx->event->output($corePath.'elements/tv/input/');
+        $modx->event->output($corePath.'tv/input/');
         break;
     case 'OnTVOutputRenderList':
-        //$modx->event->output($corePath.'elements/tv/output/');
+        //$modx->event->output($corePath.'tv/output/');
         break;
     case 'OnTVInputPropertiesList':
-        //$modx->event->output($corePath.'elements/tv/inputoptions/');
+        //$modx->event->output($corePath.'tv/inputoptions/');
         break;
     case 'OnTVOutputRenderPropertiesList':
-        //$modx->event->output($corePath.'elements/tv/properties/');
+        //$modx->event->output($corePath.'tv/properties/');
         break;
     case 'OnManagerPageBeforeRender':
         break;
