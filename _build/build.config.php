@@ -3,7 +3,7 @@
 const PKG_NAME = 'TVDraggable';
 const PKG_NAME_LOWER = 'tvdraggable';
 
-const PKG_VERSION = '0.1.1';
+const PKG_VERSION = '0.1.2';
 const PKG_RELEASE = 'beta';
 const PKG_AUTO_INSTALL = false;
 const PKG_NAMESPACE_PATH = '{core_path}components/' . PKG_NAME_LOWER . '/';

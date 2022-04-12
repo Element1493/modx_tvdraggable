@@ -1,22 +1,15 @@
 .TVDraggable{
-	
+	border: 1px solid #E4E4E4;
 }
 .TVDraggable>.row{
-	--bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
     display: flex;
     flex-wrap: wrap;
-    margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: calc(-.5 * var(--bs-gutter-x));
-    margin-left: calc(-.5 * var(--bs-gutter-x));
 }
 .TVDraggable>.row>* {
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
-    padding-right: calc(var(--bs-gutter-x) * .5);
-    padding-left: calc(var(--bs-gutter-x) * .5);
-    margin-top: var(--bs-gutter-y);
+    padding: 10px;
 }
 .TVDraggable .col{
     flex: 1 0 0%;
@@ -41,13 +34,15 @@
     text-decoration: none;
     background-color: #fff;
     border: 1px solid #E4E4E4;
+	min-height: 40px;
 }
 .TVDraggable .list-group-item+.list-group-item{
 	margin-top: 10px;
 }
 .TVDraggable-button{
 	display: flex;
-	width: 100%;
+	width: auto;
+	height: 100%;
 	cursor: pointer;
 	align-items: center;
 	margin: 0;
@@ -107,5 +102,3 @@
 .TVDraggable-add .TVDraggable-dropdown.active .TVDraggable-dropdown-menu{
 	display: flex;
 }
-
-
