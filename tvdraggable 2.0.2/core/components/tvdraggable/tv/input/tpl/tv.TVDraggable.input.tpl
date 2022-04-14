@@ -1,46 +1,10 @@
 {if $tv->elements}
-	{$elements = []}
-	{foreach  explode('||',$tv->elements) as $key=>$value}
-		{$value = explode('==',$value)}
-		{$elements[$key]['label'] = $value[0]}
-		{if $arOptions = json_decode($value[1],true)}
-			{foreach $arOptions as $value=>$options}
-				{$elements[$key]['value'] = $value}
-				{foreach $options as $name=>$option}
-					{$elements[$key]['options'][$option] = [
-						'name' =>$name,
-						'value' => ''
-					]}
-				{/foreach}
-				{break}
-			{/foreach}
-		{else}
-			{$elements[$key]['value'] = $value[1]}
-		{/if}
-	{/foreach}
-
-	{if $tv_value = json_decode($tv->value,true)}
-		{$elements_left = $tv_value}
-		{$arValue = []}
-		{foreach $tv_value as $element}
-			{$arValue[] = $element['value']}
-		{/foreach}
-		{foreach $elements as $element}
-			{if !in_array($element['value'], $arValue)}
-				{$elements_right[] = $element}
-			{/if}
-		{/foreach}
-	{else}
-		{$elements_left = []}
-		{$elements_right = $elements}
-	{/if}
-
 	<input type="hidden" id="tv{$tv->id}" name="tv{$tv->id}" value="">
 	<div id="TVDraggable-{$tv->id}" class="TVDraggable">
 		<div class="row">
 			<div class="col">
 				<div id="TVDraggable-add-{$tv->id}" class="TVDraggable-add list-group">
-					{foreach $elements_left as $element}
+					{foreach $tv_left as $element}
 						<div class="list-group-item">
 							{if $element['options']}
 								<div class="TVDraggable-dropdown">
@@ -63,7 +27,7 @@
 			</div>
 			<div class="col">
 				<div id="TVDraggable-remove-{$tv->id}" class="TVDraggable-remove list-group">
-					{foreach $elements_right as $element}
+					{foreach $tv_right as $element}
 						<div class="list-group-item">
 							{if $element['options']}
 								<div class="TVDraggable-dropdown">
@@ -152,7 +116,7 @@
 		
 		ID_TV.value = '{/literal}{$tv->value}{literal}';
 		
-		var OPTIONS = {
+		var OPTIONS_ADD = {
 			group: 'TV',
 			animation: 150,
 			onMove: function (e) {
@@ -168,8 +132,24 @@
 				ITEMS(ID_ADD);
 			}
 		};
-		new Sortable(ID_ADD,OPTIONS);
-		new Sortable(ID_REMOVE,OPTIONS);
+		var OPTIONS_REMOVE = {
+			group: 'TV',
+			animation: 150,
+			onMove: function (e) {
+				let DROPDOWN = document.querySelectorAll('.TVDraggable-dropdown');
+				if(DROPDOWN.length){
+					for (let i = 0; i < DROPDOWN.length; i++){
+						DROPDOWN[i].classList.remove('active');
+					}
+				}
+			},
+			onEnd: function (e) {
+				DROPDOWN(ID_ADD);
+				ITEMS(ID_ADD);
+			}
+		};
+		new Sortable(ID_ADD,OPTIONS_ADD);
+		new Sortable(ID_REMOVE,OPTIONS_REMOVE);
 
 	{/literal}// ]]>
 	</script>
