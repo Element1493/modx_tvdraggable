@@ -1,27 +1,12 @@
 <?php
 class modTemplateVarInputRenderTVDraggable extends modTemplateVarInputRender{
 	public function getTemplate(){
-		if(!empty($this->tv->get('elements'))){
-			$elements = [];
-			foreach(explode('||',$this->tv->get('elements')) as $key=>$value){
-				$value = explode('==',$value);
-				$elements[$key]['label'] = $value[0];
-				if($arOptions = json_decode($value[1],true)){
-					foreach($arOptions as $value=>$options){
-						$elements[$key]['value'] = $value;
-						foreach($options as $name=>$option){
-							$elements[$key]['options'][$option] = [
-								'name' =>$name,
-								'value' => ''
-							];
-						}
-						break;
-					}
-				}else{
-					$elements[$key]['value'] = $value[1];
-				}
-			}
+		if(is_file(MODX_BASE_PATH.$this->tv->get('elements')) && file_exists(MODX_BASE_PATH.$this->tv->get('elements'))){
+			$elements = json_decode(file_get_contents(MODX_BASE_PATH.$this->tv->get('elements')), true);
+		}else{
+			$elements = json_decode($this->tv->get('elements'), true);
 		}
+		
 		if($arValue = json_decode($this->tv->get('value'),true)){
 			foreach($arValue as $row){
 				$tvValue[] = $row['value'];
@@ -43,9 +28,10 @@ class modTemplateVarInputRenderTVDraggable extends modTemplateVarInputRender{
 			$elements_left = [];
 			$elements_right = $elements;
 		}
-		
+		$this->setPlaceholder('test', $elements);
 		$this->setPlaceholder('tv_left', $elements_left);
 		$this->setPlaceholder('tv_right', $elements_right);
+	
 		$corePath = $this->modx->getOption('table.core_path', null, $this->modx->getOption('core_path') . 'components/tvdraggable/');
 		return $corePath . 'tv/input/tpl/tv.TVDraggable.input.tpl';
 	}
