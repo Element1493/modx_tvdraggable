@@ -1,6 +1,6 @@
 Changelog for TVDraggable.
 
-2.0.3-beta
+1.0.3-beta
 ==============
 
 

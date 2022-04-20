@@ -18,6 +18,7 @@ switch ($modx->event->name) {
         break;
     case 'OnDocFormRender':
         $modx->regClientCSS($assetsUrl.'css/mgr/default.css');
+        $modx->regClientStartupScript($assetsUrl.'js/mgr/default.js');
         $modx->regClientStartupScript($assetsUrl.'js/mgr/Sortable.min.js');
         break;
 }
