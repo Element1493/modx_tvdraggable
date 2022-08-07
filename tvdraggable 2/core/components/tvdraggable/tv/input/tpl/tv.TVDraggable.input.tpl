@@ -50,14 +50,7 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	// <![CDATA[{literal}
-			TVDraggable.initialize({
-				"id":"{/literal}{$tv->id}{literal}",
-				"value":"{/literal}{$tv->value}{literal}"
-			});
-	{/literal}// ]]>
-	</script>
+	<script>// <![CDATA[{literal}TVDraggable.initialize({"id":"{/literal}{$tv->id}{literal}"{/literal}{if $tv->value},"value":{$tv->value}{/if}{literal}});{/literal}// ]]></script>
 {else}
 	test
 {/if}
